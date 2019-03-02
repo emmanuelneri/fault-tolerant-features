@@ -23,9 +23,24 @@
 		<java.version>1.8</java.version>
 
 		<spring.cloud.version>2.1.0.RELEASE</spring.cloud.version>
+		<lombok.version>1.18.6</lombok.version>
 
 		<docker.spotify.plugin.version>1.4.0</docker.spotify.plugin.version>
 		<docker.repository>fault-tolerant-features</docker.repository>
 	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
+	</dependencies>
+
+	<modules>
+		<module>config-server</module>
+		<module>api</module>
+        <module>web</module>
+    </modules>
 
 </project>
