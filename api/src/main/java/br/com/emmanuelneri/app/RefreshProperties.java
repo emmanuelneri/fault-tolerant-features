@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 @Getter
 public class RefreshProperties {
 
-    @Value("${hello.api.active}")
-    private boolean helloApiActive;
+    @Value("${hello.feature.active}")
+    private boolean helloFeatureActive;
+
+    @Value("${clients.feature.active}")
+    private boolean clientsFeatureActive;
 }
