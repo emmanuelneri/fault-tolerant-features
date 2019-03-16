@@ -39,8 +39,9 @@
 
 	<modules>
 		<module>config-server</module>
+		<module>feature-toggle</module>
 		<module>api</module>
-        <module>web</module>
-    </modules>
+		<module>web</module>
+	</modules>
 
 </project>

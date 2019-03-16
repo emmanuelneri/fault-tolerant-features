@@ -1,5 +1,6 @@
 package br.com.emmanuelneri.app;
 
+import br.com.emmanuelneri.feature.toggle.FeatureToggle;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,35 +8,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.List;
 
-import static br.com.emmanuelneri.app.Client.Classification.FREQUENT_BUYER;
-import static br.com.emmanuelneri.app.Client.Classification.NEVER_BUYER;
-import static br.com.emmanuelneri.app.Client.Classification.NEW;
+import static br.com.emmanuelneri.app.Client.Classification.*;
 
 @RestController
 @RequestMapping("/web")
 public class WebController {
 
-    private final RefreshProperties refreshProperties;
-
-    public WebController(RefreshProperties refreshProperties) {
-        this.refreshProperties = refreshProperties;
-    }
-
     @GetMapping(value = "/hello")
+    @FeatureToggle(enableKey = "feature.toggle.feature.hello.active", nameKey = "feature.toggle.feature.hello.name")
     public String getHello() {
-        if(!refreshProperties.isHelloFeatureActive()) {
-            throw new InactiveFeatureException("hello inactive");
-        }
-
         return "Web API";
     }
 
     @GetMapping(value = "/clients")
-    public List<Client> getClientes() {
-        if(!refreshProperties.isHelloFeatureActive()) {
-            throw new InactiveFeatureException("clients inactive");
-        }
-
+    @FeatureToggle(enableKey = "feature.toggle.feature.clients.active", nameKey = "feature.toggle.feature.clients.name")
+    public List<Client> getClients() {
         return Arrays.asList(
                 new Client(1L, "Client 1", FREQUENT_BUYER),
                 new Client(2L,"Client 2",  NEVER_BUYER),
