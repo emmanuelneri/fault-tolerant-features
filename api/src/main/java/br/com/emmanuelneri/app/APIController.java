@@ -13,13 +13,17 @@ import java.util.List;
 public class APIController {
 
     @GetMapping(value = "/hello")
-    @FeatureToggle(enableKey = "feature.toggle.feature.hello.active", nameKey = "feature.toggle.feature.hello.name")
+    @FeatureToggle(
+            enableKey = "feature.toggle.feature.hello.active",
+            nameKey = "feature.toggle.feature.hello.name")
     public String getHello() {
         return "Hello API";
     }
 
     @GetMapping(value = "/clients")
-    @FeatureToggle(enableKey = "feature.toggle.feature.clients.active", nameKey = "feature.toggle.feature.clients.name")
+    @FeatureToggle(
+            enableKey = "feature.toggle.feature.clients.active",
+            nameKey = "feature.toggle.feature.clients.name")
     public List<Client> getClientes() {
         return Arrays.asList(
                 new Client("Client 1", "094043943"),

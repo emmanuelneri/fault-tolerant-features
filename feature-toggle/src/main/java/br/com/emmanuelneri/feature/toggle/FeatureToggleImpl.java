@@ -22,17 +22,20 @@ public class FeatureToggleImpl {
         final Method method = getMethod(joinPoint);
         final FeatureToggle featureToggle = getFeatureToggleAnnotationFromMethod(method);
 
-        final boolean isFeatureEnable = Boolean.valueOf(environment.getProperty(featureToggle.enableKey()));
-        final String featureName = environment.getProperty(featureToggle.nameKey());
+        final boolean isFeatureEnable = Boolean.valueOf(getEnvironmentProperty(featureToggle.enableKey()));
+        final String featureName = getEnvironmentProperty(featureToggle.nameKey());
 
         if(!isFeatureEnable) {
             throw new InactiveFeatureException("Feature: " + featureName + " inactive.");
         }
     }
 
+    private String getEnvironmentProperty(final String property) {
+        return environment.getProperty(property);
+    }
+
     private Method getMethod(final JoinPoint joinPoint) {
-        final MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        return methodSignature.getMethod();
+        return ((MethodSignature) joinPoint.getSignature()).getMethod();
     }
 
     private FeatureToggle getFeatureToggleAnnotationFromMethod(final Method method) {
