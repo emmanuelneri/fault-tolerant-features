@@ -8,5 +8,6 @@ docker run -itd \
 
  docker run -itd \
     --name config-server \
+    --link rabbit \
     -p 8888:8888 \
     fault-tolerant-features/config-server
