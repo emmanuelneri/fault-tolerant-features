@@ -11,3 +11,10 @@ docker run -itd \
     --link rabbit \
     -p 8888:8888 \
     fault-tolerant-features/config-server
+
+docker run -itd \
+    --name ngrok \
+    --link config-server \
+    -p 4040:4040 \
+    -e NGROK_PORT=config-server:8888 \
+    wernight/ngrok
