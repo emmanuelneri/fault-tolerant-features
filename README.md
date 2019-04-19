@@ -1,8 +1,8 @@
-# distributed-configurations
+# fault-tolerant-features
 
 ---
 
-Distributed configurations with Spring Cloud Config Server
+Preparing applications to fail with feature toggle and distributed configurations
 
 ## Preparing environment
 
@@ -43,5 +43,5 @@ API - Clients: Feature: Clients inactive.
 Web - Clients: Feature: Clients inactive.
 ```
 
-To update features configuration you need to configure the [Github Webhooks](https://developer.github.com/webhooks/creating/) or force the Config Server to update the configurations files with ``./monitor-refresh.sh``.  
+To update features configurations you need to configure the [Github Webhooks](https://developer.github.com/webhooks/creating/) or force the Config Server to update the configurations files with ``./monitor-refresh.sh``.  
 
