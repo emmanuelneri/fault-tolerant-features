@@ -4,9 +4,11 @@
 
 Preparing applications to fail with feature toggle and distributed configurations
 
-## Preparing environment
+Configuration repository: https://github.com/emmanuelneri/fault-tolerant-features-configuration 
 
-#### Building applications
+### Preparing environment
+
+##### Building applications
 
 To build maven applications and generate docker images, run: 
 
@@ -15,9 +17,9 @@ To build maven applications and generate docker images, run:
 ```
 
 
-## Start Environment 
+### Start Environment 
 
-#### Start infrastructure
+##### Start infrastructure
 
 To start Rabbit and Config Server
 ```
@@ -26,14 +28,14 @@ To start Rabbit and Config Server
 
 After this, Config Server is available on ``http://localhost:8888/`` and Rabbit Management is available on ``http://localhost:15672``.
 
-#### Start applications
+##### Start applications
 
 To start API and WEB applications
 ```
 ./applications-start.sh
 ```
 
-## To execute
+### To execute
 
 Execute ``./test-apps.sh `` to test actives features:
 ```
@@ -43,5 +45,4 @@ API - Clients: Feature: Clients inactive.
 Web - Clients: Feature: Clients inactive.
 ```
 
-To update features configurations you need to configure the [Github Webhooks](https://developer.github.com/webhooks/creating/) or force the Config Server to update the configurations files with ``./monitor-refresh.sh``.  
-
+To update features configurations you need to configure the [Github Webhooks](https://developer.github.com/webhooks/creating/) or force the Config Server to update the configurations files with ``./monitor-refresh.sh``. 
