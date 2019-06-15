@@ -1,6 +1,7 @@
 package br.com.emmanuelneri.app;
 
 import br.com.emmanuelneri.feature.toggle.FeatureToggle;
+import br.com.emmanuelneri.feature.toggle.Features;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,17 +16,13 @@ import static br.com.emmanuelneri.app.Client.Classification.*;
 public class WebController {
 
     @GetMapping(value = "/hello")
-    @FeatureToggle(
-            enableKey = "feature.toggle.feature.hello.active",
-            nameKey = "feature.toggle.feature.hello.name")
+    @FeatureToggle(feature = Features.HELLO)
     public String getHello() {
         return "Web API";
     }
 
     @GetMapping(value = "/clients")
-    @FeatureToggle(
-            enableKey = "feature.toggle.feature.clients.active",
-            nameKey = "feature.toggle.feature.clients.name")
+    @FeatureToggle(feature = Features.CLIENTS)
     public List<Client> getClients() {
         return Arrays.asList(
                 new Client(1L, "Client 1", FREQUENT_BUYER),

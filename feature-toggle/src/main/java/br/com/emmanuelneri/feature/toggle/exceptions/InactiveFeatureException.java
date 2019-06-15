@@ -1,4 +1,4 @@
-package br.com.emmanuelneri.feature.toggle;
+package br.com.emmanuelneri.feature.toggle.exceptions;
 
 public class InactiveFeatureException extends RuntimeException {
 

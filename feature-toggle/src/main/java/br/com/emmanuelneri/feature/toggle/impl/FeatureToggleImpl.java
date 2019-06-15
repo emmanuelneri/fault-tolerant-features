@@ -1,5 +1,8 @@
-package br.com.emmanuelneri.feature.toggle;
+package br.com.emmanuelneri.feature.toggle.impl;
 
+import br.com.emmanuelneri.feature.toggle.FeatureToggle;
+import br.com.emmanuelneri.feature.toggle.Features;
+import br.com.emmanuelneri.feature.toggle.exceptions.InactiveFeatureException;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -7,6 +10,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+import org.togglz.core.manager.FeatureManager;
 
 import java.lang.reflect.Method;
 
@@ -17,16 +21,19 @@ public class FeatureToggleImpl {
     @Autowired
     private Environment environment;
 
+    @Autowired
+    private FeatureManager featureManager;
+
     @Before("@annotation(br.com.emmanuelneri.feature.toggle.FeatureToggle)")
     public void before(final JoinPoint joinPoint) {
         final Method method = getMethod(joinPoint);
         final FeatureToggle featureToggle = getFeatureToggleAnnotationFromMethod(method);
 
-        final boolean isFeatureEnable = Boolean.valueOf(getEnvironmentProperty(featureToggle.enableKey()));
-        final String featureName = getEnvironmentProperty(featureToggle.nameKey());
+        final Features feature = featureToggle.feature();
+        final boolean isFeatureEnable = featureManager.isActive(feature);
 
         if(!isFeatureEnable) {
-            throw new InactiveFeatureException("Feature: " + featureName + " inactive.");
+            throw new InactiveFeatureException("Features: " + feature.getName() + " inactive.");
         }
     }
 

@@ -10,7 +10,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target(ElementType.METHOD)
 public @interface FeatureToggle {
 
-    String enableKey();
-    String nameKey();
+    Features feature();
 
 }

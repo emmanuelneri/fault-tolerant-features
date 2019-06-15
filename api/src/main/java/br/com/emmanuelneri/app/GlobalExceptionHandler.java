@@ -1,6 +1,6 @@
 package br.com.emmanuelneri.app;
 
-import br.com.emmanuelneri.feature.toggle.InactiveFeatureException;
+import br.com.emmanuelneri.feature.toggle.exceptions.InactiveFeatureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
