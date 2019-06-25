@@ -14,7 +14,7 @@ public class APIController {
 
     @GetMapping(value = "/hello")
     @FeatureToggle(
-            enableKey = "feature.toggle.feature.hello.active",
+            enableKey = "hello",
             nameKey = "feature.toggle.feature.hello.name")
     public String getHello() {
         return "Hello API";
@@ -22,7 +22,7 @@ public class APIController {
 
     @GetMapping(value = "/clients")
     @FeatureToggle(
-            enableKey = "feature.toggle.feature.clients.active",
+            enableKey = "clients",
             nameKey = "feature.toggle.feature.clients.name")
     public List<Client> getClientes() {
         return Arrays.asList(

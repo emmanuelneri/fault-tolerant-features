@@ -4,8 +4,8 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.ff4j.FF4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -15,23 +15,16 @@ import java.lang.reflect.Method;
 public class FeatureToggleImpl {
 
     @Autowired
-    private Environment environment;
+    private FF4j ff4j;
 
     @Before("@annotation(br.com.emmanuelneri.feature.toggle.FeatureToggle)")
     public void before(final JoinPoint joinPoint) {
         final Method method = getMethod(joinPoint);
         final FeatureToggle featureToggle = getFeatureToggleAnnotationFromMethod(method);
 
-        final boolean isFeatureEnable = Boolean.valueOf(getEnvironmentProperty(featureToggle.enableKey()));
-        final String featureName = getEnvironmentProperty(featureToggle.nameKey());
-
-        if(!isFeatureEnable) {
-            throw new InactiveFeatureException("Feature: " + featureName + " inactive.");
+        if(!ff4j.check(featureToggle.enableKey())) {
+            throw new InactiveFeatureException("Feature: inactive.");
         }
-    }
-
-    private String getEnvironmentProperty(final String property) {
-        return environment.getProperty(property);
     }
 
     private Method getMethod(final JoinPoint joinPoint) {
